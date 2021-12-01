@@ -1,10 +1,10 @@
 # 侧边栏菜单
 menu:
   主页: /
-  归档: /archives
-  分类: /categories
-  标签: /tags
-  关于我: /about
+  # 归档: /archives
+  # 分类: /categories
+  # 标签: /tags
+  # 关于我: /about
 
 # 站点次标题和打字动效
 # https://github.com/mattboldt/typed.js
@@ -87,7 +87,7 @@ weixin: https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg
 
 # 版权声明
 # 版权声明type设定：0-关闭版权声明； 1-文章对应的md文件里有copyright: true属性，才有版权声明； 2-所有文章均有版权声明
-copyright_type: 0
+copyright_type: 2
 
 # 是否启用搜索
 # 需要安装hexo-generator-searchdb(https://github.com/theme-next/hexo-generator-searchdb)
@@ -165,9 +165,9 @@ since: 2015
 
 # ICP备案信息尾部显示
 icp:
-  enable: false
+  enable: true
   url: "http://www.beian.miit.gov.cn/" # 备案链接
-  text: "浙ICP备88888888" # 备案信息
+  text: "黔ICP备2021010183" # 备案信息
 # 公安备案信息尾部显示
 gongan:
   enable: false
