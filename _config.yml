@@ -102,4 +102,13 @@ theme: ayer
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ""
+  type: rsync
+  host: 47.117.115.27
+  user: root
+  root: /usr/local/nginx/html/wujie-blog-hexo/
+  port: 22 # Default is 22
+  delete: [true|false] # Default is true
+  args: public
+  rsh: <remote shell>
+  verbose: [true|false] # Default is true
+  ignore_errors: [true|false] # Default is false

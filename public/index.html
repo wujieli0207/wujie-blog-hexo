@@ -157,6 +157,81 @@
     
     
     <article
+  id="post-webpack入门-loader"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/12/05/webpack%E5%85%A5%E9%97%A8-loader/"
+    >webpack入门-loader</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/12/05/webpack%E5%85%A5%E9%97%A8-loader/" class="article-date">
+  <time datetime="2021-12-05T03:01:46.000Z" itemprop="datePublished">2021-12-05</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="loader-基础"><a href="#loader-基础" class="headerlink" title="loader 基础"></a>loader 基础</h2><ul>
+<li><p>将所有文件转换成 webpack 能够处理的模块，用于处理非 JS 文件</p>
+</li>
+<li><p>在 module.rule 配置，必须包含 test 和 use 属性</p>
+<ul>
+<li><code>test</code>： 标识出应该被对应的 loader 进行转换的某个或某些文件</li>
+<li><code>use</code>：进行转换时，应该使用哪个 loader<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">	<span class="attr">rules</span>: [</span><br><span class="line">	  &#123; <span class="attr">test</span>: <span class="regexp">/\.css$/</span>, use: <span class="string">&#x27;css-loader&#x27;</span> &#125;,</span><br><span class="line">	  &#123; <span class="attr">test</span>: <span class="regexp">/\.ts$/</span>, use: <span class="string">&#x27;ts-loader&#x27;</span> &#125;</span><br><span class="line">	]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = config;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>使用 loader 的三种方式</p>
+<ul>
+<li>配置（推荐）：在 webpack.config.js 中配置</li>
+<li>内联：在每个 import 语句中显式指定 loader<br>  <code>import Styles from &#39;style-loader!css-loader?modules!./styles.css&#39;;</code></li>
+<li>CLI：在 shell 命令中指定它们<br>  <code>webpack --module-bind jade-loader --module-bind &#39;css=style-loader!css-loader&#39;</code></li>
+</ul>
+</li>
+<li><p>loader 特性</p>
+<ul>
+<li>loader 支持链式传递，反向执行，loader 链中的第一个 loader 返回值给下一个 loader</li>
+<li>loader 可同步也可异步</li>
+<li>loader 可以在 Node.js 环境运行</li>
+<li>loader 能够接受查询参数</li>
+<li>loader 可以使用 <code>opotions</code> 对象进行配置</li>
+<li>可以将普通 npm 模块导出一个 loader</li>
+</ul>
+</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-webpack入门-入口与出口"
   class="article article-type-post"
   itemscope
@@ -348,6 +423,10 @@
     
     <li class="nav-item">
       <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
     </li>
     
   </ul>
