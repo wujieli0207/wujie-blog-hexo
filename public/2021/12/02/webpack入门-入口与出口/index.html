@@ -109,7 +109,8 @@
        
   <h2 id="入口及基础配置"><a href="#入口及基础配置" class="headerlink" title="入口及基础配置"></a>入口及基础配置</h2><ul>
 <li>webpack 该用哪个模块作为构建依赖图的开始</li>
-<li>在 <code>entry</code> 配置入口，可以指定一个或多个入口  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&#x27;./path/to/my/entry/file.js&#x27;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>在 <code>entry</code> 配置入口，可以指定一个或多个入口  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&#x27;./path/to/my/entry/file.js&#x27;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<span id="more"></span></li>
 <li>单页面场景配置<ul>
 <li>将应用入口和第三方库分离</li>
 <li>可以使用 <code>CommonsChunkPlugin</code>  从「应用程序 bundle」中提取 vendor 引用到 vendor bundle，把引用 vendor 的部分替换为 ，<code>__webpack_require__()</code> 调用<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">  <span class="attr">entry</span>: &#123;</span><br><span class="line">	<span class="attr">app</span>: <span class="string">&#x27;./src/app.js&#x27;</span>,</span><br><span class="line">	<span class="attr">vendors</span>: <span class="string">&#x27;./src/vendors.js&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
@@ -238,7 +239,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2015-2021
+        2021
         <i class="ri-heart-fill heart_icon"></i> Mr.wujieli
       </li>
     </ul>

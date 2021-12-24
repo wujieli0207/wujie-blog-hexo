@@ -157,6 +157,65 @@
     
     
     <article
+  id="post-vue3个人常用通信方式总结"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/12/06/vue3%E4%B8%AA%E4%BA%BA%E5%B8%B8%E7%94%A8%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E6%80%BB%E7%BB%93/"
+    >vue3个人常用通信方式总结</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/12/06/vue3%E4%B8%AA%E4%BA%BA%E5%B8%B8%E7%94%A8%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E6%80%BB%E7%BB%93/" class="article-date">
+  <time datetime="2021-12-06T07:11:16.000Z" itemprop="datePublished">2021-12-06</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="props"><a href="#props" class="headerlink" title="props"></a>props</h2><ul>
+<li><p>Vue3 子组件可以通过 props 接受父组件的传值</p>
+</li>
+<li><p>在 setup() 中可以通过 <code>props.value</code> 来访问父组件传值</p>
+</li>
+<li><p>父组件传值举例</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;child-component :value=&quot;value&quot; /&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>子组件接受并使用父组件传递值</p> 
+      <a class="article-more-link" href="/2021/12/06/vue3%E4%B8%AA%E4%BA%BA%E5%B8%B8%E7%94%A8%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E6%80%BB%E7%BB%93/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-webpack入门-loader"
   class="article article-type-post"
   itemscope
@@ -190,28 +249,11 @@
 <li><p>在 module.rule 配置，必须包含 test 和 use 属性</p>
 <ul>
 <li><code>test</code>： 标识出应该被对应的 loader 进行转换的某个或某些文件</li>
-<li><code>use</code>：进行转换时，应该使用哪个 loader<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">	<span class="attr">rules</span>: [</span><br><span class="line">	  &#123; <span class="attr">test</span>: <span class="regexp">/\.css$/</span>, use: <span class="string">&#x27;css-loader&#x27;</span> &#125;,</span><br><span class="line">	  &#123; <span class="attr">test</span>: <span class="regexp">/\.ts$/</span>, use: <span class="string">&#x27;ts-loader&#x27;</span> &#125;</span><br><span class="line">	]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = config;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>使用 loader 的三种方式</p>
-<ul>
-<li>配置（推荐）：在 webpack.config.js 中配置</li>
-<li>内联：在每个 import 语句中显式指定 loader<br>  <code>import Styles from &#39;style-loader!css-loader?modules!./styles.css&#39;;</code></li>
-<li>CLI：在 shell 命令中指定它们<br>  <code>webpack --module-bind jade-loader --module-bind &#39;css=style-loader!css-loader&#39;</code></li>
-</ul>
-</li>
-<li><p>loader 特性</p>
-<ul>
-<li>loader 支持链式传递，反向执行，loader 链中的第一个 loader 返回值给下一个 loader</li>
-<li>loader 可同步也可异步</li>
-<li>loader 可以在 Node.js 环境运行</li>
-<li>loader 能够接受查询参数</li>
-<li>loader 可以使用 <code>opotions</code> 对象进行配置</li>
-<li>可以将普通 npm 模块导出一个 loader</li>
-</ul>
-</li>
-</ul>
- 
+<li><code>use</code>：进行转换时，应该使用哪个 loader 
+      <a class="article-more-link" href="/2021/12/05/webpack%E5%85%A5%E9%97%A8-loader/"
+        >阅读更多...</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -261,31 +303,11 @@
        
   <h2 id="入口及基础配置"><a href="#入口及基础配置" class="headerlink" title="入口及基础配置"></a>入口及基础配置</h2><ul>
 <li>webpack 该用哪个模块作为构建依赖图的开始</li>
-<li>在 <code>entry</code> 配置入口，可以指定一个或多个入口  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&#x27;./path/to/my/entry/file.js&#x27;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li>单页面场景配置<ul>
-<li>将应用入口和第三方库分离</li>
-<li>可以使用 <code>CommonsChunkPlugin</code>  从「应用程序 bundle」中提取 vendor 引用到 vendor bundle，把引用 vendor 的部分替换为 ，<code>__webpack_require__()</code> 调用<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">  <span class="attr">entry</span>: &#123;</span><br><span class="line">	<span class="attr">app</span>: <span class="string">&#x27;./src/app.js&#x27;</span>,</span><br><span class="line">	<span class="attr">vendors</span>: <span class="string">&#x27;./src/vendors.js&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>多页面场景配置<ul>
-<li>不同页面入口分开配置，进入新页面时独立加载 html 和对应引用</li>
-<li>可以使用 <code>CommonsChunkPlugin</code> 为每个页面间的应用程序共享代码创建 bundle，实现代码复用的效果<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">  <span class="attr">entry</span>: &#123;</span><br><span class="line">	<span class="attr">pageOne</span>: <span class="string">&#x27;./src/pageOne/index.js&#x27;</span>,</span><br><span class="line">	<span class="attr">pageTwo</span>: <span class="string">&#x27;./src/pageTwo/index.js&#x27;</span>,</span><br><span class="line">	<span class="attr">pageThree</span>: <span class="string">&#x27;./src/pageThree/index.js&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h2 id="出口及基础配置"><a href="#出口及基础配置" class="headerlink" title="出口及基础配置"></a>出口及基础配置</h2><ul>
-<li><p>webpack 输出 bundles 的目录及命名方式配置，默认为  <code>./dist</code></p>
-</li>
-<li><p><strong>可以指定多个入口，但只能有一个出口（output）</strong></p>
-</li>
-<li><p>在 <code>output</code> 字段配置：输出为一个对象，输出路径和文件名</p>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">	<span class="attr">path</span>: path.resolve(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">	<span class="attr">filename</span>: <span class="string">&#x27;my-first-webpack.bundle.js&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li><p>对于多文件入口，使用占位符保持文件名正确</p>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">entry</span>: &#123;</span><br><span class="line">	<span class="attr">app</span>: <span class="string">&#x27;./src/app.js&#x27;</span>,</span><br><span class="line">	<span class="attr">search</span>: <span class="string">&#x27;./src/search.js&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">	<span class="attr">filename</span>: <span class="string">&#x27;[name].js&#x27;</span>,</span><br><span class="line">	<span class="attr">path</span>: __dirname + <span class="string">&#x27;/dist&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写入到硬盘：./dist/app.js, ./dist/search.js</span></span><br></pre></td></tr></table></figure></li>
-<li><p>在编译时不知道最终输出文件的 <code>publicPath</code> 的情况下，<code>publicPath</code> 留空，并且在入口起点设置 <code>__webpack_public_path__</code></p>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__webpack_public_path__ = myRuntimePublicPath</span><br><span class="line"></span><br><span class="line"><span class="comment">// 剩余的应用程序入口</span></span><br></pre></td></tr></table></figure></li>
-</ul>
- 
+<li>在 <code>entry</code> 配置入口，可以指定一个或多个入口  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&#x27;./path/to/my/entry/file.js&#x27;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> 
+      <a class="article-more-link" href="/2021/12/02/webpack%E5%85%A5%E9%97%A8-%E5%85%A5%E5%8F%A3%E4%B8%8E%E5%87%BA%E5%8F%A3/"
+        >阅读更多...</a
+      >
+       
       <!-- reward -->
       
     </div>
@@ -364,7 +386,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2015-2021
+        2021
         <i class="ri-heart-fill heart_icon"></i> Mr.wujieli
       </li>
     </ul>

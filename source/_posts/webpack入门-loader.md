@@ -8,6 +8,7 @@ tags: webpack
 - 在 module.rule 配置，必须包含 test 和 use 属性
 	- `test`： 标识出应该被对应的 loader 进行转换的某个或某些文件
 	- `use`：进行转换时，应该使用哪个 loader
+<!--more-->
 	```js
 	const path = require('path');
 

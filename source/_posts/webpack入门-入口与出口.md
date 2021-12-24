@@ -11,6 +11,7 @@ tags: webpack
 	  entry: './path/to/my/entry/file.js'
 	};
 	```
+<!--more-->
 - 单页面场景配置
 	- 将应用入口和第三方库分离
 	- 可以使用 `CommonsChunkPlugin`  从「应用程序 bundle」中提取 vendor 引用到 vendor bundle，把引用 vendor 的部分替换为 ，`__webpack_require__()` 调用
