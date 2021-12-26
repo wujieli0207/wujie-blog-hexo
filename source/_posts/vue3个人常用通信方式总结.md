@@ -2,6 +2,7 @@
 title: vue3个人常用通信方式总结
 date: 2021-12-06 15:11:16
 tags: vue
+hide: true
 ---
 ## props
 - Vue3 子组件可以通过 props 接受父组件的传值

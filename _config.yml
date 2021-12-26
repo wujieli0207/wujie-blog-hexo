@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Wujie Blog
+title: Wujie
 subtitle: "Wujie 的个人博客"
-description: ""
+description: "不忘初心，无限进步"
 keywords: Blog Learning Share
 author: Mr.wujieli
 language: zh-CN
@@ -13,7 +13,7 @@ timezone: "Asia/Shanghai"
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: http://www.wujieli.top
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -95,12 +95,9 @@ exclude:
 ignore:
 
 # Extensions
-## Plugins: https://hexo.io/plugins/
-## Themes: https://hexo.io/themes/
-theme: ayer
-# theme: fluid # 指定主题
+theme: hexo-theme-matery # 指定主题
 
-# Deployment
+# Deployment 自动化部署
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: rsync
@@ -113,3 +110,28 @@ deploy:
   rsh: <remote shell>
   verbose: [true|false] # Default is true
   ignore_errors: [true|false] # Default is false
+
+# 博客搜索配置
+search:
+  path: search.xml
+  field: post
+
+# 文章字数统计插件
+postInfo:
+  date: true
+  update: false
+  wordCount: true # 设置文章字数统计为 true.
+  totalCount: false # 设置站点文章总字数统计为 true.
+  min2read: true # 阅读时长.
+  readCount: false # 阅读次数
+
+# RSS 配置
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: " "
+  order_by: -date
