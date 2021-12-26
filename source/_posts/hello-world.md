@@ -1,6 +1,7 @@
 ---
 title: Hello World
 date: 2021-11-25 18:05:23
+categories: 其他
 tags: 程序人生
 img: https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20211225154304.jpg
 ---

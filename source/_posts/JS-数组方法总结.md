@@ -1,6 +1,7 @@
 ---
 title: JS 数组方法总结
 date: 2021-12-23 15:50:56
+categories: 前端
 tags: JavaScript
 img: https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20211225154802.jpg
 ---
@@ -65,7 +66,7 @@ img: https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20211225154802.jpg
 	- 如果返回为 true，则返回 item 并**停止迭代**
 	- 如果返回为 false，则返回 undefined
 	- 使用场景
-	```js
+	```javascript
 	let result = array.find((item, index, array) => {
 		item.id === 1;
 	});
@@ -77,7 +78,7 @@ img: https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20211225154802.jpg
 		- 如果返回为 true，则 item 被放到结果数据，迭代继续直到完成
 		- 如果什么都没有找到则返回空数组
 	- 使用示例
-	```js
+	```javascript
 	// 返回结果为数组
 	let results = array.filter((item, index, array) => {
 		item.id < 3;
@@ -88,7 +89,7 @@ img: https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20211225154802.jpg
 - map() 方法
 	- 对每个元素都调用函数，**返回一个新的数组**
 	- 使用示例
-	```js
+	```javascript
 	let array = [1, 2, 3];
 	let result = array.map((item, index, array) => {
 		item * 2;
@@ -100,7 +101,7 @@ img: https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20211225154802.jpg
 	- 对当前数组进行排序（**没有生成新数组**）
 	- 默认使用字符串排序，如果是**数字排序需要指定参考函数**
 	- 返回为负数，按照升序排列（**负数表示小于**）
-	```js
+	```javascript
 	array.sort( (a, b) => {a - b;});
 	```
 	- 返回为正数，按照降序排列（上述例子相反，**正数表示大于**）
@@ -113,7 +114,7 @@ img: https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20211225154802.jpg
 	- `array.join(delim)` 使用分隔符 delim 将数组组成字符串
 
 - reduce() / reduceRight() 方法
-	```js
+	```javascript
 	let value = array.reduce((accumulator, item, index, array) => {
 
 	}, [initial])
@@ -122,7 +123,7 @@ img: https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20211225154802.jpg
 		- accumulator：上一个函数调用的结果，第一次等于 initial 参数（如果提供了 initial 参数的话），如果没提供 initial 参数，则以第一个参数作为初始值，从第二个参数开始迭代
 		- item、index、array：数组元素、索引、数组本身
 	- 使用示例：
-	```js
+	```javascript
 	const array = [1, 2, 3, 4, 5];
 	let result = array.reduce((sum, curent) => {sum + current}); // result = 15
 	```

@@ -1,16 +1,16 @@
 ---
 title: webpack入门-loader
 date: 2021-12-05 11:01:46
+categories: 前端
 tags: webpack
-hide: true
+img: https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20211226142337.jpg
 ---
 ## loader 基础
 - 将所有文件转换成 webpack 能够处理的模块，用于处理非 JS 文件
 - 在 module.rule 配置，必须包含 test 和 use 属性
 	- `test`： 标识出应该被对应的 loader 进行转换的某个或某些文件
 	- `use`：进行转换时，应该使用哪个 loader
-<!--more-->
-	```js
+	```javascript
 	const path = require('path');
 
 	const config = {

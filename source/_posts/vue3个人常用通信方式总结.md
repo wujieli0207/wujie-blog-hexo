@@ -1,14 +1,15 @@
 ---
 title: vue3个人常用通信方式总结
 date: 2021-12-06 15:11:16
+categories: 前端
 tags: vue
-hide: true
+img: https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20211226142336.jpg
 ---
 ## props
 - Vue3 子组件可以通过 props 接受父组件的传值
 - 在 setup() 中可以通过 `props.value` 来访问父组件传值
 - 父组件传值举例
-	```vue
+	```html
 	<template>
 		<child-component :value="value" />
 	</template>
@@ -16,7 +17,7 @@ hide: true
 
 - 子组件接受并使用父组件传递值
 <!--more-->
-	```vue
+	```html
 	<template>
 		{{ fatherValue }}
 	</template>
@@ -47,7 +48,7 @@ hide: true
 ## refs
 - 通过 refs ，父组件可以直接获取子组件实例，并向子组件传值
 - 父组件举例
-	```vue
+	```html
 	<template>
 		<child ref="childRef" />
 		<button @click="sendValue()">
@@ -84,7 +85,7 @@ hide: true
 	```
 
 - 子组件举例
-	```vue
+	```html
 	<template>
 		Son: {{ valueRef }}
 	</template>
@@ -118,7 +119,7 @@ hide: true
 ## emits
 - 子组件可以通过 emit 暴露属性，父组件通过 emit 暴露属性操作子组件，比如：点击子组件触发了一个父组件大函数
 - 父亲组件举例
-	```vue
+	```html
 	<template>
 		<child-component :add-child="addChildMethod()"
 	</template>
@@ -141,7 +142,7 @@ hide: true
 	```
 
 - 子组件举例
-	```vue
+	```html
 	<template>
 		<div @click="$emit('addChild')">
 	        <!-- some -->

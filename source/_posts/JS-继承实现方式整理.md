@@ -1,6 +1,7 @@
 ---
 title: JS 继承实现方式整理
 date: 2021-12-24 15:55:02
+categories: 前端
 tags: JavaScript
 img: https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20211225161114.jpg
 ---
