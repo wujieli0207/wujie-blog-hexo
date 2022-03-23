@@ -1,308 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2021/11/25/hello-world/</url>
-    <content><![CDATA[<p>Hey wujie, 这是你发布在网络上的第一篇博客，希望你不忘初心，无限进步</p>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>程序人生</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>vue3个人常用通信方式总结</title>
-    <url>/2021/12/06/vue3%E4%B8%AA%E4%BA%BA%E5%B8%B8%E7%94%A8%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h2 id="props"><a href="#props" class="headerlink" title="props"></a>props</h2><ul>
-<li><p>Vue3 子组件可以通过 props 接受父组件的传值</p>
-</li>
-<li><p>在 setup() 中可以通过 <code>props.value</code> 来访问父组件传值</p>
-</li>
-<li><p>父组件传值举例</p>
-  <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>child-component</span> <span class="token attr-name">:value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>value<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
-<li><p>子组件接受并使用父组件传递值</p>
-<span id="more"></span>
-  <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
-	&#123;&#123; fatherValue &#125;&#125;
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-    <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> defineComponent<span class="token punctuation">,</span> ref <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">defineComponent</span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-        name<span class="token operator">:</span> <span class="token string">"ChildComponent"</span><span class="token punctuation">,</span>
-        props<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-            value<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-                type<span class="token operator">:</span> String<span class="token punctuation">,</span>
-                <span class="token keyword">default</span><span class="token operator">:</span> <span class="token string">""</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-        <span class="token function">setup</span><span class="token punctuation">(</span> <span class="token parameter">props</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">const</span> fatherValue <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-            fatherValue <span class="token operator">=</span> props<span class="token punctuation">.</span>value
-            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> fatherValue <span class="token punctuation">)</span>
-
-            <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
-                fatherValue
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="refs"><a href="#refs" class="headerlink" title="refs"></a>refs</h2></li>
-<li><p>通过 refs ，父组件可以直接获取子组件实例，并向子组件传值</p>
-</li>
-<li><p>父组件举例</p>
-  <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>child</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>childRef<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sendValue()<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        Change Child Value
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-    <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> defineComponent<span class="token punctuation">,</span> ref <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">defineComponent</span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-        name<span class="token operator">:</span> <span class="token string">"ChildComponent"</span><span class="token punctuation">,</span>
-        props<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-            value<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-                type<span class="token operator">:</span> String<span class="token punctuation">,</span>
-                <span class="token keyword">default</span><span class="token operator">:</span> <span class="token string">""</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-        <span class="token function">setup</span><span class="token punctuation">(</span> <span class="token parameter">props</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">const</span> childRef <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-            <span class="token keyword">const</span> <span class="token function-variable function">sendValue</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-                console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"childRef"</span><span class="token punctuation">,</span> childRef<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                <span class="token comment">// 调用子组件方法</span>
-                childRef<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">acceptValue</span><span class="token punctuation">(</span><span class="token string">"newValue"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-
-            <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
-                fatherValue
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>子组件举例</p>
-  <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
-	Son: &#123;&#123; valueRef &#125;&#125;
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-    <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> defineComponent<span class="token punctuation">,</span> ref <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">defineComponent</span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-        name<span class="token operator">:</span> <span class="token string">"ChildComponent"</span><span class="token punctuation">,</span>
-        props<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-            value<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-                type<span class="token operator">:</span> String<span class="token punctuation">,</span>
-                <span class="token keyword">default</span><span class="token operator">:</span> <span class="token string">""</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-        <span class="token function">setup</span><span class="token punctuation">(</span> <span class="token parameter">props</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">const</span> valueRef <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-            <span class="token keyword">const</span> <span class="token function-variable function">acceptValue</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-            	valueRef<span class="token punctuation">.</span>value <span class="token operator">=</span> value<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-
-            <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
-                valueRef<span class="token punctuation">,</span>
-                acceptValue
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-<h2 id="emits"><a href="#emits" class="headerlink" title="emits"></a>emits</h2><ul>
-<li><p>子组件可以通过 emit 暴露属性，父组件通过 emit 暴露属性操作子组件，比如：点击子组件触发了一个父组件大函数</p>
-</li>
-<li><p>父亲组件举例</p>
-  <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
-	&lt;child-component :add-child="addChildMethod()"
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
-
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-    <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> defineComponent<span class="token punctuation">,</span> ref <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">defineComponent</span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-        name<span class="token operator">:</span> <span class="token string">"FatherComponent"</span><span class="token punctuation">,</span>
-        <span class="token function">setup</span><span class="token punctuation">(</span> <span class="token parameter">props</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">const</span> <span class="token function-variable function">addChildMethod</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-                <span class="token comment">// mehtod</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
-                addChildMethod
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>子组件举例</p>
-  <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
-	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>$emit(<span class="token punctuation">'</span>addChild<span class="token punctuation">'</span>)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        <span class="token comment">&lt;!-- some --></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>webpack入门-loader</title>
-    <url>/2021/12/05/webpack%E5%85%A5%E9%97%A8-loader/</url>
-    <content><![CDATA[<h2 id="loader-基础"><a href="#loader-基础" class="headerlink" title="loader 基础"></a>loader 基础</h2><ul>
-<li><p>将所有文件转换成 webpack 能够处理的模块，用于处理非 JS 文件</p>
-</li>
-<li><p>在 module.rule 配置，必须包含 test 和 use 属性</p>
+    <title>JS 什么是类数组</title>
+    <url>/2022/01/08/JS-%E4%BB%80%E4%B9%88%E6%98%AF%E7%B1%BB%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h2 id="对象是类数组常见情况"><a href="#对象是类数组常见情况" class="headerlink" title="对象是类数组常见情况"></a>对象是类数组常见情况</h2><ul>
+<li><p>对象是类数组的情况</p>
 <ul>
-<li><code>test</code>： 标识出应该被对应的 loader 进行转换的某个或某些文件</li>
-<li><code>use</code>：进行转换时，应该使用哪个 loader<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  module<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-	rules<span class="token operator">:</span> <span class="token punctuation">[</span>
-	  <span class="token punctuation">&#123;</span> test<span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\.css$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span> use<span class="token operator">:</span> <span class="token string">'css-loader'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-	  <span class="token punctuation">&#123;</span> test<span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\.ts$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span> use<span class="token operator">:</span> <span class="token string">'ts-loader'</span> <span class="token punctuation">&#125;</span>
-	<span class="token punctuation">]</span>
-  <span class="token punctuation">&#125;</span>
+<li>函数参数对象 arguments</li>
+<li>用 <code>getElementsByTagName/Classname/Name</code> 获得的 HTMLCollection</li>
+<li>用 <code>querySelector</code> 获得的 NodeList</li>
+</ul>
+</li>
+<li><p>函数参数对象 arguments 特点</p>
+<ul>
+<li><code>Object.prototype.toString.call</code> 返回 <code>[object arguments]</code>，代表不是数组</li>
+<li>具有 length 属性</li>
+<li>callee 属性：获取当前的函数</li>
+</ul>
+</li>
+<li><p>用 <code>getElementsByTagName/Classname/Name</code> 获得的 HTMLCollection</p>
+<ul>
+<li><code>Object.prototype.toString.call</code> 返回 <code>[object HTMLFormElement]</code>，代表不是数组</li>
+<li>HTML DOM 对象的一个接口，包含获取到的 DOM 元素集合类</li>
+<li>DOM 更新时会实时更新</li>
+</ul>
+</li>
+<li><p>用 <code>querySelector</code> 获得的 NodeList</p>
+<ul>
+<li><code>Object.prototype.toString.call</code> 返回 <code>[object NodeList]</code>，代表不是数组</li>
+<li>实时更新</li>
+</ul>
+</li>
+</ul>
+<h2 id="类数组应用场景"><a href="#类数组应用场景" class="headerlink" title="类数组应用场景"></a>类数组应用场景</h2><ul>
+<li>遍历函数参数</li>
+<li>定义链接字符串函数<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">myConcat</span><span class="token punctuation">(</span><span class="token parameter">separa</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">let</span> args <span class="token operator">=</span> <span class="token class-name">Array</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>arguments<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> args<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>separa<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">myConcat</span><span class="token punctuation">(</span><span class="token string">", "</span><span class="token punctuation">,</span> <span class="token string">"red"</span><span class="token punctuation">,</span> <span class="token string">"orange"</span><span class="token punctuation">,</span> <span class="token string">"blue"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>函数间传递参数<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">// 通过 apply 方法传递函数参数</span>
+<span class="token keyword">function</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">foo</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> arguments<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">bar</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1 2 3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h2 id="类数组转化为数组的方式"><a href="#类数组转化为数组的方式" class="headerlink" title="类数组转化为数组的方式"></a>类数组转化为数组的方式</h2><ul>
+<li>借用数组方法转化为数组<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">let</span> arrayLike <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+	<span class="token number">0</span><span class="token operator">:</span> <span class="token string">"java"</span><span class="token punctuation">,</span>
+	<span class="token number">1</span><span class="token operator">:</span> <span class="token string">"script"</span><span class="token punctuation">,</span>
+	length<span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> config<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-</li>
-<li><p>使用 loader 的三种方式</p>
-<ul>
-<li>配置（推荐）：在 webpack.config.js 中配置</li>
-<li>内联：在每个 import 语句中显式指定 loader<br>  <code>import Styles from &#39;style-loader!css-loader?modules!./styles.css&#39;;</code></li>
-<li>CLI：在 shell 命令中指定它们<br>  <code>webpack --module-bind jade-loader --module-bind &#39;css=style-loader!css-loader&#39;</code></li>
-</ul>
-</li>
-<li><p>loader 特性</p>
-<ul>
-<li>loader 支持链式传递，反向执行，loader 链中的第一个 loader 返回值给下一个 loader</li>
-<li>loader 可同步也可异步</li>
-<li>loader 可以在 Node.js 环境运行</li>
-<li>loader 能够接受查询参数</li>
-<li>loader 可以使用 <code>opotions</code> 对象进行配置</li>
-<li>可以将普通 npm 模块导出一个 loader</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>webpack</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>webpack入门-入口与出口</title>
-    <url>/2021/12/02/webpack%E5%85%A5%E9%97%A8-%E5%85%A5%E5%8F%A3%E4%B8%8E%E5%87%BA%E5%8F%A3/</url>
-    <content><![CDATA[<h2 id="入口及基础配置"><a href="#入口及基础配置" class="headerlink" title="入口及基础配置"></a>入口及基础配置</h2><ul>
-<li>webpack 该用哪个模块作为构建依赖图的开始</li>
-<li>在 <code>entry</code> 配置入口，可以指定一个或多个入口  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  entry<span class="token operator">:</span> <span class="token string">'./path/to/my/entry/file.js'</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<span id="more"></span></li>
-<li>单页面场景配置<ul>
-<li>将应用入口和第三方库分离</li>
-<li>可以使用 <code>CommonsChunkPlugin</code>  从「应用程序 bundle」中提取 vendor 引用到 vendor bundle，把引用 vendor 的部分替换为 ，<code>__webpack_require__()</code> 调用<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-	app<span class="token operator">:</span> <span class="token string">'./src/app.js'</span><span class="token punctuation">,</span>
-	vendors<span class="token operator">:</span> <span class="token string">'./src/vendors.js'</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-</li>
-<li>多页面场景配置<ul>
-<li>不同页面入口分开配置，进入新页面时独立加载 html 和对应引用</li>
-<li>可以使用 <code>CommonsChunkPlugin</code> 为每个页面间的应用程序共享代码创建 bundle，实现代码复用的效果<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-	pageOne<span class="token operator">:</span> <span class="token string">'./src/pageOne/index.js'</span><span class="token punctuation">,</span>
-	pageTwo<span class="token operator">:</span> <span class="token string">'./src/pageTwo/index.js'</span><span class="token punctuation">,</span>
-	pageThree<span class="token operator">:</span> <span class="token string">'./src/pageThree/index.js'</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-</li>
-</ul>
-<h2 id="出口及基础配置"><a href="#出口及基础配置" class="headerlink" title="出口及基础配置"></a>出口及基础配置</h2><ul>
-<li><p>webpack 输出 bundles 的目录及命名方式配置，默认为  <code>./dist</code></p>
-</li>
-<li><p><strong>可以指定多个入口，但只能有一个出口（output）</strong></p>
-</li>
-<li><p>在 <code>output</code> 字段配置：输出为一个对象，输出路径和文件名</p>
-  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  output<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-	path<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'dist'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-	filename<span class="token operator">:</span> <span class="token string">'my-first-webpack.bundle.js'</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>对于多文件入口，使用占位符保持文件名正确</p>
-  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-	app<span class="token operator">:</span> <span class="token string">'./src/app.js'</span><span class="token punctuation">,</span>
-	search<span class="token operator">:</span> <span class="token string">'./src/search.js'</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  output<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-	filename<span class="token operator">:</span> <span class="token string">'[name].js'</span><span class="token punctuation">,</span>
-	path<span class="token operator">:</span> __dirname <span class="token operator">+</span> <span class="token string">'/dist'</span>
-  <span class="token punctuation">&#125;</span>
+<span class="token comment">// 借用 push 方法</span>
+<span class="token class-name">Array</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>arrayLike<span class="token punctuation">,</span> <span class="token string">"wujie"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arrayLike<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &#123; '0': 'java', '1': 'script', '2': 'wujie', length: 3 &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>借用 ES6 展开运算符或 <code>Array.from</code> 转化为数组<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">sum</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// 通过展开运算符将类数组转化为数组，从而可以使用数组方法，Array.from 有类似效果</span>
+	<span class="token keyword">const</span> args <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span>arguments<span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> args<span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">sum<span class="token punctuation">,</span> cur</span><span class="token punctuation">)</span> <span class="token operator">=></span> sum <span class="token operator">+</span> cur<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 
-<span class="token comment">// 写入到硬盘：./dist/app.js, ./dist/search.js</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>在编译时不知道最终输出文件的 <code>publicPath</code> 的情况下，<code>publicPath</code> 留空，并且在入口起点设置 <code>__webpack_public_path__</code></p>
-  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">__webpack_public_path__ <span class="token operator">=</span> myRuntimePublicPath
-
-<span class="token comment">// 剩余的应用程序入口</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">sum</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 ]]></content>
       <categories>
         <category>前端</category>
       </categories>
       <tags>
-        <tag>webpack</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
-    <title>我的2021年总结</title>
-    <url>/2021/12/22/%E6%88%91%E7%9A%842021%E5%B9%B4%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h2 id="关于工作"><a href="#关于工作" class="headerlink" title="关于工作"></a>关于工作</h2><p>我是在保险公司工作的程序员，之前做过的项目相对比较简单，或者是采购的产品再定制化开发，而今年算是独立负责了一个部门重点项目，熬了几个月也算是项目正常上线了，尤其是最后一个月，经常加班到凌晨一两点。</p>
-<p>在甲方做程序员不像乙方，具体开发写代码主要都是由供应商做的，而主要做的是项目管理和协调一类的工作，缺点是技术方面的进步比较慢，优点是看到的层次更高，不是专注于某个功能的开发，而是会更加偏向业务方面。</p>
-<p>但其实说是偏向管理，但很多时候自己也要上手写代码，去改 Bug。而且我觉得其实只是改 Bug 也就还可以接受，但还有另一方面是沟通协调，尤其是跨系统间的沟通协调以及和业务部门的沟通，这种没有正确答案的问题处理起来才最为痛苦。在这次项目中我对接了保险的四个主要渠道部门还有两个产品开发部门，沟通协调确实很考验人，当然学到的东西也非常多。</p>
-<p>最后其实还是非常感谢自己的领导和开发同事对这个项目的支持，单凭我一个人肯定是没法完成这个项目的，也希望自己以后能成长为能够有能力独立完成这类项目的人</p>
-<h2 id="关于个人成长"><a href="#关于个人成长" class="headerlink" title="关于个人成长"></a>关于个人成长</h2><h3 id="番茄钟学习记录"><a href="#番茄钟学习记录" class="headerlink" title="番茄钟学习记录"></a>番茄钟学习记录</h3><p>我习惯番茄钟记录自己的学习时间，粗略看了一下统计，今年累计学习了 1211 个番茄钟，每个番茄钟 25 分钟，差不多是 21 天的学习时间。看到这个结果确认很感慨，一年有 365 天，真正用于自己学习的时间却不到一个月。</p>
-<p><img src="https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20211222081511.png"><br>每周的番茄钟学习记录</p>
-<p>从图表来看我也是从 10 月份才开始真正沉下心来进入学习的状态的，之前一直不知道自己的方向是什么，IT 技术很广泛，什么都想了解一些，但又什么都不够精通。也是从 10 月份开始才逐渐发觉自己的兴趣在前端开发，找到了兴趣点也必然会投入时间学习</p>
-<h3 id="从折腾工具到关注产出"><a href="#从折腾工具到关注产出" class="headerlink" title="从折腾工具到关注产出"></a>从折腾工具到关注产出</h3><p>今年我尝试过许多生产力工具软件，单就笔记应用来说，我就尝试过 Typora、印象笔记、语雀、Notion、Wolai、Flomo、Obsidian 还有后来推出的众多双链笔记，有一些浅尝辄止，有一些也确实深度使用过。Notion 和 Flomo 都是我之前使用过的笔记，Notion 功能强大并且有很高的自由度，Flomo 的轻便简洁，我都在这两个应用留下了许多笔记。最后放弃的原因是因为两个应用都需要联网使用，并且数据保存在云端也让我非常不放心。现在逐渐把笔记迁移到了 Obsidian，通过阿里云的 OSS 作为图床，Typera 作功能补充。Obsidian 的更新频率很快，今年也推出了 IOS 端的应用，markdown 所见即所得的功能也在开发当中。</p>
-<p>在折腾工具的过程中我逐渐发现一个问题，到底是工具重要，还是如何使用工具重要，现在想想，其实最重要的，是<strong>通过生产力工具产出了什么东西</strong>。用过很多笔记应用，却没有形成自己的知识库体系，也没有内容输出，用过很多 GTD 或者待办事项应用，但该拖延的还是拖延，该关注任务的没有及时关注。所以当把关注点放在了最终产出物和积累上时，工具也没有那么重要了，只要顺手就行了。有了足够多的产出和积累，也就更清楚的了解自己需要的工具是什么了</p>
-<h2 id="关于生活"><a href="#关于生活" class="headerlink" title="关于生活"></a>关于生活</h2><h3 id="极简主义和焦虑"><a href="#极简主义和焦虑" class="headerlink" title="极简主义和焦虑"></a>极简主义和焦虑</h3><p>今年阅读了山下英子的《断舍离》，也逐渐了解了极简主义的生活方式，我也开始清理和自己多余的物品并逐渐添置新的物品，我也逐渐形成了自己的购物观念：</p>
-<ol>
-<li><strong>如无必要，勿增实体</strong></li>
-<li><strong>如有必要，尽量选择自己承受范围内做好的</strong></li>
-</ol>
-<p>第一条是为了避免自己购入不必要的东西，并且要及时清理掉不用的东西。而第二条我觉得才是重点，如果确实是必要的，选择承受范围内最好的可以避免不必要的折腾，就像去年购入的 AirPods Pro 耳机，确实很贵，但购买了这幅耳机之后，我再没有折腾过耳机了</p>
-<p>有时候在想自己为什么会产生焦虑，也许就是因为自己的欲望太多，难以填满，而极简主义的思维和生活方式，恰恰就是在对抗这种焦虑，降低自己的欲望，把重心放到重要的事情上面</p>
-<h2 id="未来规划"><a href="#未来规划" class="headerlink" title="未来规划"></a>未来规划</h2><p>新的一年，希望自己不再追求知识的广度，而是深入自己领域，追求知识的深度。另一方面希望完善自己的工作方法论和工作流程，积累自己的“知识资本”</p>
+    <title>JS 数据类型基础梳理</title>
+    <url>/2021/12/28/JS-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%9F%BA%E7%A1%80%E6%A2%B3%E7%90%86/</url>
+    <content><![CDATA[<h2 id="JS-的数据类型基础"><a href="#JS-的数据类型基础" class="headerlink" title="JS 的数据类型基础"></a>JS 的数据类型基础</h2><ul>
+<li><p>JS 中数据类型分为两大类：基础数据类型，引用数据类型</p>
+</li>
+<li><p>基础数据类型有 7 种，分别为：</p>
+<ul>
+<li>Number 类型</li>
+<li>String 类型</li>
+<li>Boolean 类型</li>
+<li>Null：“无” “空” “不存在”</li>
+<li>Undefined：已被声明但未被赋值</li>
+<li>Symbol：用于对象唯一标识符</li>
+<li>BigInt 类型：表示大于或小于 2^53-1 的数字</li>
+</ul>
+</li>
+<li><p>引用数据类型： Object 为引用数据类型，还有其他子类型，如：<code>Function</code>、<code>Array</code>、<code>RegExp</code>、<code>Date</code></p>
+</li>
+<li><p>基础数据类型存储在<strong>栈内存</strong>，被引用或者拷贝的时候，会创建一个完全相等的变量</p>
+</li>
+<li><p>引用类型存储在<strong>堆内存</strong>，存储的是地址，多个引用指向同一个地址</p>
+</li>
+</ul>
+<h2 id="JS-数据类型判断方式"><a href="#JS-数据类型判断方式" class="headerlink" title="JS 数据类型判断方式"></a>JS 数据类型判断方式</h2><ul>
+<li><p>typeof 判断数据类型</p>
+<ul>
+<li>typeof 能够准确判断基础数据类型，对于引用数据类型不能准确判断（引用类型只能判断出 Function）</li>
+<li><code>typeof null</code> 结果是 object 是 JS 早期错误，为兼容而保留</li>
+<li><code>typeof alert</code> alert 在 JS 中是一个函数<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "undefined"</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "number"</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token number">10n</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "bigint"</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "boolean"</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token string">"wujie"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "string"</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token function">Symbol</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "symbol"</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> Math<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "object"  (1)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "object"  (2)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> alert<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "function"  (3)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</li>
+<li><p>instanceof 判断数据类型</p>
+<ul>
+<li>通过判断对象原型链上的对象类型，来推断新对象的数据类型</li>
+<li>适用于判断引用数据类型，但不适合基础数据类型判断</li>
+<li>实现 instanceof 封装代码示例<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">myInstanceof</span><span class="token punctuation">(</span><span class="token parameter">left<span class="token punctuation">,</span> right</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 先使用 typef 判断，如果不是引用数据类型则直接返回</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> left <span class="token operator">!==</span> <span class="token string">"object"</span> <span class="token operator">||</span> left <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">// 获取参数原型对象，循环对比原型链条上的对象是否和 right 对象的类型一致,</span>
+    <span class="token keyword">let</span> proto <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 没有找到相同原型对象则返回 false</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>proto <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 找到相同的原型对象才返回 true</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>proto <span class="token operator">===</span> right<span class="token punctuation">.</span>prototype<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        proto <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">myInstanceof</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Number</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Number<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">myInstanceof</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> Number<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</li>
+<li><p>Object.prototype.toString 方法</p>
+<ul>
+<li>对象的原型方法，可以统一返回格式为 <code>[object Xxx]</code> 的字符串（注意 Xxx 第一个字母大写）</li>
+<li>对于 Object 对象，可以直接调用，其他对象需要通过 call 调用<pre class="line-numbers language-js" data-language="js"><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Object]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Object]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Number]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token string">"10"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object String]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Boolean]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Null]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">undefined</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Undefined]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Function]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">wujiel</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object RegExp]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Date]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Array]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</li>
+<li><p>全局通用的类型判断方法：可以通过 <code>typeof</code> +<code> Object.prototype.string.call()</code> 来实现</p>
+  <pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">getType</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">let</span> type <span class="token operator">=</span> <span class="token keyword">typeof</span> obj<span class="token punctuation">;</span>
+
+  <span class="token comment">// 基础类型直接返回</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">!==</span> <span class="token string">"object"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> type<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token comment">// 引用类型 toString 判断,通过正则表达式过滤结果</span>
+  <span class="token keyword">return</span> <span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span>
+    <span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^\[object (\S+)]$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span> <span class="token string">"$1"</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// number</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// array</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// object</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// function</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// date</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h2 id="JS-数据类型转换"><a href="#JS-数据类型转换" class="headerlink" title="JS 数据类型转换"></a>JS 数据类型转换</h2><ul>
+<li>JS 的数据类型转换分为：强制类型转换，隐式类型转换</li>
+</ul>
+<h3 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h3><ul>
+<li><p>通过 <code>Number() parseInt() parseFloat() toString() String Boolean()</code> 方法实现的数据转换</p>
+</li>
+<li><p><code>Number()</code> 类型转换规则</p>
+<ul>
+<li>数字，返回自身</li>
+<li>Boolean，false 转换为 0，true 转换为 1</li>
+<li>null 转换为 0</li>
+<li>undefined 转换为 NaN</li>
+<li>Symbol 抛出异常</li>
+<li>对象，使用 <code>Object</code> 转换规则</li>
+<li>字符串<ul>
+<li>如果只包含数字，转换为十进制数字</li>
+<li>如果包含有效浮点格式转化为浮点数</li>
+<li>空字符串转换为 0</li>
+<li>以上三种之外的转换为 NaN</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>Boolean()</code> 类型装转换规则</p>
+<ul>
+<li>除了 undefined、null、false、”” 、0（包括 +0 和 -0）、NaN 转换为 false ，其他都转换为 true</li>
+</ul>
+</li>
+</ul>
+<h3 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h3><ul>
+<li><p>逻辑运算操作符（&amp;&amp; || !），运算符（+ - * /），关系操作符（&gt; &lt; &gt;= &lt;=），相等运算符（<code>==</code>），if / while 条件，在遇到两边类型不一致的情况，都会出现隐式类型转换</p>
+</li>
+<li><p><code>==</code> 隐式转换规则</p>
+<ul>
+<li>如果类型相同，无须转换</li>
+<li>如果其中一个是 null 或者 undefined，那么另一个必须为 null 或者 undefined，才会返回 true，否则都返回 false</li>
+<li>如果其中一个是 Symbol 类型，那么返回 false</li>
+<li>两个如果为 string 和 number 类型，那么就会将 string 转换为 number</li>
+<li>如果一个操作值是 boolean，那么转换 boolean 为 number</li>
+<li>如果一个操作值为 object 且另一方为 string、number 或者 symbol，就会把 object 转为原始类型再进行判断（调用 object 的 valueOf/toString 方法进行转换）</li>
+</ul>
+</li>
+<li><p><code>+</code> 隐式转换规则</p>
+<ul>
+<li>其中一个是字符串，另一个是 undefined null，则 undefined null 转换为字符串拼接；另一个普通对象、数组、正则等，先调用 Object 转换规则，再进行拼接</li>
+<li>其中一个是数字，另一个是 undefined null，则 undefined null 转换为数字进行计算</li>
+<li>其中一个是字符串、一个是数字，则按照字符串规则进行拼接</li>
+<li>示例代码<pre class="line-numbers language-js" data-language="js"><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 2</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1NaN</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1&#123;&#125;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1[object, object]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token string">"1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 11</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</li>
+</ul>
+<h3 id="Object-隐式转换规则"><a href="#Object-隐式转换规则" class="headerlink" title="Object 隐式转换规则"></a>Object 隐式转换规则</h3><ul>
+<li>如果有 <code>Symbol.toPrimitive</code> 方法，优先调用</li>
+<li>调用 <code>valueOf()</code> 方法，如果转换为基础数据类型则返回</li>
+<li>调用 <code>toString()</code> 方法，如果转换为基础数据类型则返回</li>
+<li>以上三种没有转换成功则报错</li>
+<li>示例代码<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">let</span> object <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  value<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token number">2</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token number">3</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">[</span>Symbol<span class="token punctuation">.</span>toPrimitive<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token number">4</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> object<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 5 优先调用 Symbol.toPrimitive 方法</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1[object Object] 调用 toString 方法</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 11,2,,3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
 ]]></content>
       <categories>
-        <category>无限进步</category>
+        <category>前端</category>
       </categories>
       <tags>
-        <tag>复盘与总结</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -709,270 +671,280 @@ console<span class="token punctuation">.</span><span class="token function">log<
       </tags>
   </entry>
   <entry>
-    <title>JS 数据类型基础梳理</title>
-    <url>/2021/12/28/JS-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%9F%BA%E7%A1%80%E6%A2%B3%E7%90%86/</url>
-    <content><![CDATA[<h2 id="JS-的数据类型基础"><a href="#JS-的数据类型基础" class="headerlink" title="JS 的数据类型基础"></a>JS 的数据类型基础</h2><ul>
-<li><p>JS 中数据类型分为两大类：基础数据类型，引用数据类型</p>
-</li>
-<li><p>基础数据类型有 7 种，分别为：</p>
-<ul>
-<li>Number 类型</li>
-<li>String 类型</li>
-<li>Boolean 类型</li>
-<li>Null：“无” “空” “不存在”</li>
-<li>Undefined：已被声明但未被赋值</li>
-<li>Symbol：用于对象唯一标识符</li>
-<li>BigInt 类型：表示大于或小于 2^53-1 的数字</li>
-</ul>
-</li>
-<li><p>引用数据类型： Object 为引用数据类型，还有其他子类型，如：<code>Function</code>、<code>Array</code>、<code>RegExp</code>、<code>Date</code></p>
-</li>
-<li><p>基础数据类型存储在<strong>栈内存</strong>，被引用或者拷贝的时候，会创建一个完全相等的变量</p>
-</li>
-<li><p>引用类型存储在<strong>堆内存</strong>，存储的是地址，多个引用指向同一个地址</p>
-</li>
-</ul>
-<h2 id="JS-数据类型判断方式"><a href="#JS-数据类型判断方式" class="headerlink" title="JS 数据类型判断方式"></a>JS 数据类型判断方式</h2><ul>
-<li><p>typeof 判断数据类型</p>
-<ul>
-<li>typeof 能够准确判断基础数据类型，对于引用数据类型不能准确判断（引用类型只能判断出 Function）</li>
-<li><code>typeof null</code> 结果是 object 是 JS 早期错误，为兼容而保留</li>
-<li><code>typeof alert</code> alert 在 JS 中是一个函数<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "undefined"</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "number"</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token number">10n</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "bigint"</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "boolean"</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token string">"wujie"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "string"</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token function">Symbol</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "symbol"</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> Math<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "object"  (1)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "object"  (2)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> alert<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "function"  (3)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-</li>
-<li><p>instanceof 判断数据类型</p>
-<ul>
-<li>通过判断对象原型链上的对象类型，来推断新对象的数据类型</li>
-<li>适用于判断引用数据类型，但不适合基础数据类型判断</li>
-<li>实现 instanceof 封装代码示例<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">myInstanceof</span><span class="token punctuation">(</span><span class="token parameter">left<span class="token punctuation">,</span> right</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token comment">// 先使用 typef 判断，如果不是引用数据类型则直接返回</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> left <span class="token operator">!==</span> <span class="token string">"object"</span> <span class="token operator">||</span> left <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token comment">// 获取参数原型对象，循环对比原型链条上的对象是否和 right 对象的类型一致,</span>
-    <span class="token keyword">let</span> proto <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// 没有找到相同原型对象则返回 false</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>proto <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-
-        <span class="token comment">// 找到相同的原型对象才返回 true</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>proto <span class="token operator">===</span> right<span class="token punctuation">.</span>prototype<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        proto <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">myInstanceof</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Number</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Number<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">myInstanceof</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> Number<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-</li>
-<li><p>Object.prototype.toString 方法</p>
-<ul>
-<li>对象的原型方法，可以统一返回格式为 <code>[object Xxx]</code> 的字符串（注意 Xxx 第一个字母大写）</li>
-<li>对于 Object 对象，可以直接调用，其他对象需要通过 call 调用<pre class="line-numbers language-js" data-language="js"><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Object]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Object]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Number]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token string">"10"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object String]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Boolean]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Null]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">undefined</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Undefined]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Function]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">wujiel</span><span class="token regex-delimiter">/</span><span class="token regex-flags">g</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object RegExp]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Date]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [object Array]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-</li>
-<li><p>全局通用的类型判断方法：可以通过 <code>typeof</code> +<code> Object.prototype.string.call()</code> 来实现</p>
-  <pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">getType</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">let</span> type <span class="token operator">=</span> <span class="token keyword">typeof</span> obj<span class="token punctuation">;</span>
-
-  <span class="token comment">// 基础类型直接返回</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>type <span class="token operator">!==</span> <span class="token string">"object"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> type<span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span>
-
-  <span class="token comment">// 引用类型 toString 判断,通过正则表达式过滤结果</span>
-  <span class="token keyword">return</span> <span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span>
-    <span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span>
-    <span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^\[object (\S+)]$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span> <span class="token string">"$1"</span><span class="token punctuation">)</span>
-    <span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// number</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// array</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// object</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// function</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// date</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-<h2 id="JS-数据类型转换"><a href="#JS-数据类型转换" class="headerlink" title="JS 数据类型转换"></a>JS 数据类型转换</h2><ul>
-<li>JS 的数据类型转换分为：强制类型转换，隐式类型转换</li>
-</ul>
-<h3 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h3><ul>
-<li><p>通过 <code>Number() parseInt() parseFloat() toString() String Boolean()</code> 方法实现的数据转换</p>
-</li>
-<li><p><code>Number()</code> 类型转换规则</p>
-<ul>
-<li>数字，返回自身</li>
-<li>Boolean，false 转换为 0，true 转换为 1</li>
-<li>null 转换为 0</li>
-<li>undefined 转换为 NaN</li>
-<li>Symbol 抛出异常</li>
-<li>对象，使用 <code>Object</code> 转换规则</li>
-<li>字符串<ul>
-<li>如果只包含数字，转换为十进制数字</li>
-<li>如果包含有效浮点格式转化为浮点数</li>
-<li>空字符串转换为 0</li>
-<li>以上三种之外的转换为 NaN</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><code>Boolean()</code> 类型装转换规则</p>
-<ul>
-<li>除了 undefined、null、false、”” 、0（包括 +0 和 -0）、NaN 转换为 false ，其他都转换为 true</li>
-</ul>
-</li>
-</ul>
-<h3 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h3><ul>
-<li><p>逻辑运算操作符（&amp;&amp; || !），运算符（+ - * /），关系操作符（&gt; &lt; &gt;= &lt;=），相等运算符（<code>==</code>），if / while 条件，在遇到两边类型不一致的情况，都会出现隐式类型转换</p>
-</li>
-<li><p><code>==</code> 隐式转换规则</p>
-<ul>
-<li>如果类型相同，无须转换</li>
-<li>如果其中一个是 null 或者 undefined，那么另一个必须为 null 或者 undefined，才会返回 true，否则都返回 false</li>
-<li>如果其中一个是 Symbol 类型，那么返回 false</li>
-<li>两个如果为 string 和 number 类型，那么就会将 string 转换为 number</li>
-<li>如果一个操作值是 boolean，那么转换 boolean 为 number</li>
-<li>如果一个操作值为 object 且另一方为 string、number 或者 symbol，就会把 object 转为原始类型再进行判断（调用 object 的 valueOf/toString 方法进行转换）</li>
-</ul>
-</li>
-<li><p><code>+</code> 隐式转换规则</p>
-<ul>
-<li>其中一个是字符串，另一个是 undefined null，则 undefined null 转换为字符串拼接；另一个普通对象、数组、正则等，先调用 Object 转换规则，再进行拼接</li>
-<li>其中一个是数字，另一个是 undefined null，则 undefined null 转换为数字进行计算</li>
-<li>其中一个是字符串、一个是数字，则按照字符串规则进行拼接</li>
-<li>示例代码<pre class="line-numbers language-js" data-language="js"><code class="language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 2</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1NaN</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1&#123;&#125;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1[object, object]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token string">"1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 11</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-</li>
-</ul>
-<h3 id="Object-隐式转换规则"><a href="#Object-隐式转换规则" class="headerlink" title="Object 隐式转换规则"></a>Object 隐式转换规则</h3><ul>
-<li>如果有 <code>Symbol.toPrimitive</code> 方法，优先调用</li>
-<li>调用 <code>valueOf()</code> 方法，如果转换为基础数据类型则返回</li>
-<li>调用 <code>toString()</code> 方法，如果转换为基础数据类型则返回</li>
-<li>以上三种没有转换成功则报错</li>
-<li>示例代码<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">let</span> object <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  value<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> <span class="token number">2</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> <span class="token number">3</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">[</span>Symbol<span class="token punctuation">.</span>toPrimitive<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> <span class="token number">4</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> object<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 5 优先调用 Symbol.toPrimitive 方法</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1[object Object] 调用 toString 方法</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 11,2,,3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
+    <title>Hello World</title>
+    <url>/2021/11/25/hello-world/</url>
+    <content><![CDATA[<p>Hey wujie, 这是你发布在网络上的第一篇博客，希望你不忘初心，无限进步</p>
 ]]></content>
       <categories>
-        <category>前端</category>
+        <category>其他</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
+        <tag>程序人生</tag>
       </tags>
   </entry>
   <entry>
-    <title>JS 什么是类数组</title>
-    <url>/2022/01/08/JS-%E4%BB%80%E4%B9%88%E6%98%AF%E7%B1%BB%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<h2 id="对象是类数组常见情况"><a href="#对象是类数组常见情况" class="headerlink" title="对象是类数组常见情况"></a>对象是类数组常见情况</h2><ul>
-<li><p>对象是类数组的情况</p>
-<ul>
-<li>函数参数对象 arguments</li>
-<li>用 <code>getElementsByTagName/Classname/Name</code> 获得的 HTMLCollection</li>
-<li>用 <code>querySelector</code> 获得的 NodeList</li>
-</ul>
+    <title>vue3个人常用通信方式总结</title>
+    <url>/2021/12/06/vue3%E4%B8%AA%E4%BA%BA%E5%B8%B8%E7%94%A8%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="props"><a href="#props" class="headerlink" title="props"></a>props</h2><ul>
+<li><p>Vue3 子组件可以通过 props 接受父组件的传值</p>
 </li>
-<li><p>函数参数对象 arguments 特点</p>
-<ul>
-<li><code>Object.prototype.toString.call</code> 返回 <code>[object arguments]</code>，代表不是数组</li>
-<li>具有 length 属性</li>
-<li>callee 属性：获取当前的函数</li>
-</ul>
+<li><p>在 setup() 中可以通过 <code>props.value</code> 来访问父组件传值</p>
 </li>
-<li><p>用 <code>getElementsByTagName/Classname/Name</code> 获得的 HTMLCollection</p>
-<ul>
-<li><code>Object.prototype.toString.call</code> 返回 <code>[object HTMLFormElement]</code>，代表不是数组</li>
-<li>HTML DOM 对象的一个接口，包含获取到的 DOM 元素集合类</li>
-<li>DOM 更新时会实时更新</li>
-</ul>
-</li>
-<li><p>用 <code>querySelector</code> 获得的 NodeList</p>
-<ul>
-<li><code>Object.prototype.toString.call</code> 返回 <code>[object NodeList]</code>，代表不是数组</li>
-<li>实时更新</li>
-</ul>
-</li>
-</ul>
-<h2 id="类数组应用场景"><a href="#类数组应用场景" class="headerlink" title="类数组应用场景"></a>类数组应用场景</h2><ul>
-<li>遍历函数参数</li>
-<li>定义链接字符串函数<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">myConcat</span><span class="token punctuation">(</span><span class="token parameter">separa</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">let</span> args <span class="token operator">=</span> <span class="token class-name">Array</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>arguments<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">return</span> args<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>separa<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">myConcat</span><span class="token punctuation">(</span><span class="token string">", "</span><span class="token punctuation">,</span> <span class="token string">"red"</span><span class="token punctuation">,</span> <span class="token string">"orange"</span><span class="token punctuation">,</span> <span class="token string">"blue"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>函数间传递参数<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token comment">// 通过 apply 方法传递函数参数</span>
-<span class="token keyword">function</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token function">foo</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> arguments<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token function">bar</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1 2 3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-<h2 id="类数组转化为数组的方式"><a href="#类数组转化为数组的方式" class="headerlink" title="类数组转化为数组的方式"></a>类数组转化为数组的方式</h2><ul>
-<li>借用数组方法转化为数组<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">let</span> arrayLike <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-	<span class="token number">0</span><span class="token operator">:</span> <span class="token string">"java"</span><span class="token punctuation">,</span>
-	<span class="token number">1</span><span class="token operator">:</span> <span class="token string">"script"</span><span class="token punctuation">,</span>
-	length<span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<li><p>父组件传值举例</p>
+  <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>child-component</span> <span class="token attr-name">:value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>value<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<li><p>子组件接受并使用父组件传递值</p>
+<span id="more"></span>
+  <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+	&#123;&#123; fatherValue &#125;&#125;
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+    <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> defineComponent<span class="token punctuation">,</span> ref <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
 
-<span class="token comment">// 借用 push 方法</span>
-<span class="token class-name">Array</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>arrayLike<span class="token punctuation">,</span> <span class="token string">"wujie"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arrayLike<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &#123; '0': 'java', '1': 'script', '2': 'wujie', length: 3 &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>借用 ES6 展开运算符或 <code>Array.from</code> 转化为数组<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">sum</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token comment">// 通过展开运算符将类数组转化为数组，从而可以使用数组方法，Array.from 有类似效果</span>
-	<span class="token keyword">const</span> args <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span>arguments<span class="token punctuation">]</span><span class="token punctuation">;</span>
-	<span class="token keyword">return</span> args<span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">sum<span class="token punctuation">,</span> cur</span><span class="token punctuation">)</span> <span class="token operator">=></span> sum <span class="token operator">+</span> cur<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
+    <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">defineComponent</span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        name<span class="token operator">:</span> <span class="token string">"ChildComponent"</span><span class="token punctuation">,</span>
+        props<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+            value<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+                type<span class="token operator">:</span> String<span class="token punctuation">,</span>
+                <span class="token keyword">default</span><span class="token operator">:</span> <span class="token string">""</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token function">setup</span><span class="token punctuation">(</span> <span class="token parameter">props</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">const</span> fatherValue <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">sum</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+            fatherValue <span class="token operator">=</span> props<span class="token punctuation">.</span>value
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> fatherValue <span class="token punctuation">)</span>
+
+            <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+                fatherValue
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="refs"><a href="#refs" class="headerlink" title="refs"></a>refs</h2></li>
+<li><p>通过 refs ，父组件可以直接获取子组件实例，并向子组件传值</p>
+</li>
+<li><p>父组件举例</p>
+  <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>child</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>childRef<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sendValue()<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        Change Child Value
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+    <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> defineComponent<span class="token punctuation">,</span> ref <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">defineComponent</span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        name<span class="token operator">:</span> <span class="token string">"ChildComponent"</span><span class="token punctuation">,</span>
+        props<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+            value<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+                type<span class="token operator">:</span> String<span class="token punctuation">,</span>
+                <span class="token keyword">default</span><span class="token operator">:</span> <span class="token string">""</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token function">setup</span><span class="token punctuation">(</span> <span class="token parameter">props</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">const</span> childRef <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">const</span> <span class="token function-variable function">sendValue</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+                console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"childRef"</span><span class="token punctuation">,</span> childRef<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// 调用子组件方法</span>
+                childRef<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">acceptValue</span><span class="token punctuation">(</span><span class="token string">"newValue"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+
+            <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+                fatherValue
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>子组件举例</p>
+  <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+	Son: &#123;&#123; valueRef &#125;&#125;
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+    <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> defineComponent<span class="token punctuation">,</span> ref <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">defineComponent</span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        name<span class="token operator">:</span> <span class="token string">"ChildComponent"</span><span class="token punctuation">,</span>
+        props<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+            value<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+                type<span class="token operator">:</span> String<span class="token punctuation">,</span>
+                <span class="token keyword">default</span><span class="token operator">:</span> <span class="token string">""</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token function">setup</span><span class="token punctuation">(</span> <span class="token parameter">props</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">const</span> valueRef <span class="token operator">=</span> <span class="token function">ref</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">const</span> <span class="token function-variable function">acceptValue</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+            	valueRef<span class="token punctuation">.</span>value <span class="token operator">=</span> value<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+
+            <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+                valueRef<span class="token punctuation">,</span>
+                acceptValue
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h2 id="emits"><a href="#emits" class="headerlink" title="emits"></a>emits</h2><ul>
+<li><p>子组件可以通过 emit 暴露属性，父组件通过 emit 暴露属性操作子组件，比如：点击子组件触发了一个父组件大函数</p>
+</li>
+<li><p>父亲组件举例</p>
+  <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+	&lt;child-component :add-child="addChildMethod()"
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+    <span class="token keyword">import</span> <span class="token punctuation">&#123;</span> defineComponent<span class="token punctuation">,</span> ref <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"vue"</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">defineComponent</span> <span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        name<span class="token operator">:</span> <span class="token string">"FatherComponent"</span><span class="token punctuation">,</span>
+        <span class="token function">setup</span><span class="token punctuation">(</span> <span class="token parameter">props</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">const</span> <span class="token function-variable function">addChildMethod</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+                <span class="token comment">// mehtod</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+                addChildMethod
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>子组件举例</p>
+  <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>$emit(<span class="token punctuation">'</span>addChild<span class="token punctuation">'</span>)<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token comment">&lt;!-- some --></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 ]]></content>
       <categories>
         <category>前端</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
+        <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>webpack入门-loader</title>
+    <url>/2021/12/05/webpack%E5%85%A5%E9%97%A8-loader/</url>
+    <content><![CDATA[<h2 id="loader-基础"><a href="#loader-基础" class="headerlink" title="loader 基础"></a>loader 基础</h2><ul>
+<li><p>将所有文件转换成 webpack 能够处理的模块，用于处理非 JS 文件</p>
+</li>
+<li><p>在 module.rule 配置，必须包含 test 和 use 属性</p>
+<ul>
+<li><code>test</code>： 标识出应该被对应的 loader 进行转换的某个或某些文件</li>
+<li><code>use</code>：进行转换时，应该使用哪个 loader<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  module<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+	rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+	  <span class="token punctuation">&#123;</span> test<span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\.css$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span> use<span class="token operator">:</span> <span class="token string">'css-loader'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+	  <span class="token punctuation">&#123;</span> test<span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\.ts$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span> use<span class="token operator">:</span> <span class="token string">'ts-loader'</span> <span class="token punctuation">&#125;</span>
+	<span class="token punctuation">]</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> config<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</li>
+<li><p>使用 loader 的三种方式</p>
+<ul>
+<li>配置（推荐）：在 webpack.config.js 中配置</li>
+<li>内联：在每个 import 语句中显式指定 loader<br>  <code>import Styles from &#39;style-loader!css-loader?modules!./styles.css&#39;;</code></li>
+<li>CLI：在 shell 命令中指定它们<br>  <code>webpack --module-bind jade-loader --module-bind &#39;css=style-loader!css-loader&#39;</code></li>
+</ul>
+</li>
+<li><p>loader 特性</p>
+<ul>
+<li>loader 支持链式传递，反向执行，loader 链中的第一个 loader 返回值给下一个 loader</li>
+<li>loader 可同步也可异步</li>
+<li>loader 可以在 Node.js 环境运行</li>
+<li>loader 能够接受查询参数</li>
+<li>loader 可以使用 <code>opotions</code> 对象进行配置</li>
+<li>可以将普通 npm 模块导出一个 loader</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>webpack入门-入口与出口</title>
+    <url>/2021/12/02/webpack%E5%85%A5%E9%97%A8-%E5%85%A5%E5%8F%A3%E4%B8%8E%E5%87%BA%E5%8F%A3/</url>
+    <content><![CDATA[<h2 id="入口及基础配置"><a href="#入口及基础配置" class="headerlink" title="入口及基础配置"></a>入口及基础配置</h2><ul>
+<li>webpack 该用哪个模块作为构建依赖图的开始</li>
+<li>在 <code>entry</code> 配置入口，可以指定一个或多个入口  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  entry<span class="token operator">:</span> <span class="token string">'./path/to/my/entry/file.js'</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span id="more"></span></li>
+<li>单页面场景配置<ul>
+<li>将应用入口和第三方库分离</li>
+<li>可以使用 <code>CommonsChunkPlugin</code>  从「应用程序 bundle」中提取 vendor 引用到 vendor bundle，把引用 vendor 的部分替换为 ，<code>__webpack_require__()</code> 调用<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  entry<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+	app<span class="token operator">:</span> <span class="token string">'./src/app.js'</span><span class="token punctuation">,</span>
+	vendors<span class="token operator">:</span> <span class="token string">'./src/vendors.js'</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</li>
+<li>多页面场景配置<ul>
+<li>不同页面入口分开配置，进入新页面时独立加载 html 和对应引用</li>
+<li>可以使用 <code>CommonsChunkPlugin</code> 为每个页面间的应用程序共享代码创建 bundle，实现代码复用的效果<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  entry<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+	pageOne<span class="token operator">:</span> <span class="token string">'./src/pageOne/index.js'</span><span class="token punctuation">,</span>
+	pageTwo<span class="token operator">:</span> <span class="token string">'./src/pageTwo/index.js'</span><span class="token punctuation">,</span>
+	pageThree<span class="token operator">:</span> <span class="token string">'./src/pageThree/index.js'</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</li>
+</ul>
+<h2 id="出口及基础配置"><a href="#出口及基础配置" class="headerlink" title="出口及基础配置"></a>出口及基础配置</h2><ul>
+<li><p>webpack 输出 bundles 的目录及命名方式配置，默认为  <code>./dist</code></p>
+</li>
+<li><p><strong>可以指定多个入口，但只能有一个出口（output）</strong></p>
+</li>
+<li><p>在 <code>output</code> 字段配置：输出为一个对象，输出路径和文件名</p>
+  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  output<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+	path<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'dist'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+	filename<span class="token operator">:</span> <span class="token string">'my-first-webpack.bundle.js'</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>对于多文件入口，使用占位符保持文件名正确</p>
+  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
+  entry<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+	app<span class="token operator">:</span> <span class="token string">'./src/app.js'</span><span class="token punctuation">,</span>
+	search<span class="token operator">:</span> <span class="token string">'./src/search.js'</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  output<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+	filename<span class="token operator">:</span> <span class="token string">'[name].js'</span><span class="token punctuation">,</span>
+	path<span class="token operator">:</span> __dirname <span class="token operator">+</span> <span class="token string">'/dist'</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 写入到硬盘：./dist/app.js, ./dist/search.js</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>在编译时不知道最终输出文件的 <code>publicPath</code> 的情况下，<code>publicPath</code> 留空，并且在入口起点设置 <code>__webpack_public_path__</code></p>
+  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">__webpack_public_path__ <span class="token operator">=</span> myRuntimePublicPath
+
+<span class="token comment">// 剩余的应用程序入口</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>webpack</tag>
       </tags>
   </entry>
   <entry>
@@ -2230,6 +2202,246 @@ foo<span class="token operator">:</span> <span class="token function">bar</span>
     <span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>我的2021年总结</title>
+    <url>/2021/12/22/%E6%88%91%E7%9A%842021%E5%B9%B4%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="关于工作"><a href="#关于工作" class="headerlink" title="关于工作"></a>关于工作</h2><p>我是在保险公司工作的程序员，之前做过的项目相对比较简单，或者是采购的产品再定制化开发，而今年算是独立负责了一个部门重点项目，熬了几个月也算是项目正常上线了，尤其是最后一个月，经常加班到凌晨一两点。</p>
+<p>在甲方做程序员不像乙方，具体开发写代码主要都是由供应商做的，而主要做的是项目管理和协调一类的工作，缺点是技术方面的进步比较慢，优点是看到的层次更高，不是专注于某个功能的开发，而是会更加偏向业务方面。</p>
+<p>但其实说是偏向管理，但很多时候自己也要上手写代码，去改 Bug。而且我觉得其实只是改 Bug 也就还可以接受，但还有另一方面是沟通协调，尤其是跨系统间的沟通协调以及和业务部门的沟通，这种没有正确答案的问题处理起来才最为痛苦。在这次项目中我对接了保险的四个主要渠道部门还有两个产品开发部门，沟通协调确实很考验人，当然学到的东西也非常多。</p>
+<p>最后其实还是非常感谢自己的领导和开发同事对这个项目的支持，单凭我一个人肯定是没法完成这个项目的，也希望自己以后能成长为能够有能力独立完成这类项目的人</p>
+<h2 id="关于个人成长"><a href="#关于个人成长" class="headerlink" title="关于个人成长"></a>关于个人成长</h2><h3 id="番茄钟学习记录"><a href="#番茄钟学习记录" class="headerlink" title="番茄钟学习记录"></a>番茄钟学习记录</h3><p>我习惯番茄钟记录自己的学习时间，粗略看了一下统计，今年累计学习了 1211 个番茄钟，每个番茄钟 25 分钟，差不多是 21 天的学习时间。看到这个结果确认很感慨，一年有 365 天，真正用于自己学习的时间却不到一个月。</p>
+<p><img src="https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20211222081511.png"><br>每周的番茄钟学习记录</p>
+<p>从图表来看我也是从 10 月份才开始真正沉下心来进入学习的状态的，之前一直不知道自己的方向是什么，IT 技术很广泛，什么都想了解一些，但又什么都不够精通。也是从 10 月份开始才逐渐发觉自己的兴趣在前端开发，找到了兴趣点也必然会投入时间学习</p>
+<h3 id="从折腾工具到关注产出"><a href="#从折腾工具到关注产出" class="headerlink" title="从折腾工具到关注产出"></a>从折腾工具到关注产出</h3><p>今年我尝试过许多生产力工具软件，单就笔记应用来说，我就尝试过 Typora、印象笔记、语雀、Notion、Wolai、Flomo、Obsidian 还有后来推出的众多双链笔记，有一些浅尝辄止，有一些也确实深度使用过。Notion 和 Flomo 都是我之前使用过的笔记，Notion 功能强大并且有很高的自由度，Flomo 的轻便简洁，我都在这两个应用留下了许多笔记。最后放弃的原因是因为两个应用都需要联网使用，并且数据保存在云端也让我非常不放心。现在逐渐把笔记迁移到了 Obsidian，通过阿里云的 OSS 作为图床，Typera 作功能补充。Obsidian 的更新频率很快，今年也推出了 IOS 端的应用，markdown 所见即所得的功能也在开发当中。</p>
+<p>在折腾工具的过程中我逐渐发现一个问题，到底是工具重要，还是如何使用工具重要，现在想想，其实最重要的，是<strong>通过生产力工具产出了什么东西</strong>。用过很多笔记应用，却没有形成自己的知识库体系，也没有内容输出，用过很多 GTD 或者待办事项应用，但该拖延的还是拖延，该关注任务的没有及时关注。所以当把关注点放在了最终产出物和积累上时，工具也没有那么重要了，只要顺手就行了。有了足够多的产出和积累，也就更清楚的了解自己需要的工具是什么了</p>
+<h2 id="关于生活"><a href="#关于生活" class="headerlink" title="关于生活"></a>关于生活</h2><h3 id="极简主义和焦虑"><a href="#极简主义和焦虑" class="headerlink" title="极简主义和焦虑"></a>极简主义和焦虑</h3><p>今年阅读了山下英子的《断舍离》，也逐渐了解了极简主义的生活方式，我也开始清理和自己多余的物品并逐渐添置新的物品，我也逐渐形成了自己的购物观念：</p>
+<ol>
+<li><strong>如无必要，勿增实体</strong></li>
+<li><strong>如有必要，尽量选择自己承受范围内做好的</strong></li>
+</ol>
+<p>第一条是为了避免自己购入不必要的东西，并且要及时清理掉不用的东西。而第二条我觉得才是重点，如果确实是必要的，选择承受范围内最好的可以避免不必要的折腾，就像去年购入的 AirPods Pro 耳机，确实很贵，但购买了这幅耳机之后，我再没有折腾过耳机了</p>
+<p>有时候在想自己为什么会产生焦虑，也许就是因为自己的欲望太多，难以填满，而极简主义的思维和生活方式，恰恰就是在对抗这种焦虑，降低自己的欲望，把重心放到重要的事情上面</p>
+<h2 id="未来规划"><a href="#未来规划" class="headerlink" title="未来规划"></a>未来规划</h2><p>新的一年，希望自己不再追求知识的广度，而是深入自己领域，追求知识的深度。另一方面希望完善自己的工作方法论和工作流程，积累自己的“知识资本”</p>
+]]></content>
+      <categories>
+        <category>无限进步</category>
+      </categories>
+      <tags>
+        <tag>复盘与总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《Vuejs 设计与实现》学习笔记：框架设计概览</title>
+    <url>/2022/03/23/%E3%80%8AVuejs-%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0%E3%80%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%A7%88/</url>
+    <content><![CDATA[<h3 id="第-1-章：权衡的艺术"><a href="#第-1-章：权衡的艺术" class="headerlink" title="第 1 章：权衡的艺术"></a>第 1 章：权衡的艺术</h3><ul>
+<li><p>命令式和声明式</p>
+<ul>
+<li>命令式：关注目的实现的<strong>过程</strong>，比如 JQuery、直接操作 Dom</li>
+<li>声明式：关注目的实现的<strong>结果</strong>，不在乎如何实现<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;div @click&#x3D;&quot;() &#x3D;&gt; alert(&#39;hello&#39;)&quot;&gt;hello&lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>声明式框架内部封装的是命令式代码</li>
+<li><strong>声明式的性能 &lt;= 命令式</strong><ul>
+<li>命令式直接操作，性能 = B(直接修改)</li>
+<li>声明式需要找出区别，再通过命令操作，性能 = A(找出差异) + B(直接修改)</li>
+</ul>
+</li>
+<li>声明式的可维护性 &gt; 命令式</li>
+<li>设计声明式框架，重点在于：<strong>保持可维护性的同时，尽可能提升性能</strong></li>
+</ul>
+</li>
+<li><p>虚拟 DOM 性能比较</p>
+<ul>
+<li><p>三种常用创建页面方式：innerHTML、虚拟 DOM、原生操作</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>innerHTML</th>
+<th>虚拟 DOM</th>
+<th>原生</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>性能</td>
+<td>差</td>
+<td>一般</td>
+<td>最好</td>
+</tr>
+<tr>
+<td>可维护性</td>
+<td>一般</td>
+<td>最好</td>
+<td>差</td>
+</tr>
+<tr>
+<td>心智负担</td>
+<td>一般</td>
+<td>最好</td>
+<td>差</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>新建页面时，innerHTML 和虚拟 DOM 性能差距不大</p>
+</li>
+<li><p>innerHTML 性能差的原因：在更新页面时，需要销毁所有旧 DOM，重新创建新 DOM，<strong>页面越大，性能越差</strong></p>
+</li>
+<li><p>虚拟 DOM 只更新必要的 DOM，和页面大小无关</p>
+</li>
+</ul>
+</li>
+<li><p>运行时和编译时</p>
+<ul>
+<li>运行时：代码直接运行，缺点是不能分析提供的代码内容，缺少性能</li>
+<li>编译时：将代码进行分析转换为可执行的代码，缺点是灵活性较差</li>
+<li>Vue.js 是运行时 + 编译时架构，<strong>保证灵活性的基础上，通过分析，尽可能提升性能</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="第-2-章：框架设计的核心要素"><a href="#第-2-章：框架设计的核心要素" class="headerlink" title="第 2 章：框架设计的核心要素"></a>第 2 章：框架设计的核心要素</h3><ul>
+<li><strong>提升用户的开发体验</strong>：比如明显的告警错误提示<ul>
+<li>快速定位问题</li>
+<li>节省时间</li>
+</ul>
+</li>
+<li><strong>控制代码体积</strong><ul>
+<li>框架层面支持：比如区分 dev 和 prod 环境，dev 环境执行的错误提示等代码在 prod 环境可以剔除，<strong>不会增加生产代码体积</strong></li>
+<li>Tree-Shaking：排除永远不会执行的代码<ul>
+<li>必须是 ESModule 才支持 Tree-Shaking</li>
+<li>通过静态扫描排除不必要的代码</li>
+<li>如果代码产生副作用（对外部产生影响），则代码不会被剔除。一般只有顶级调用的函数才可能出现副作用</li>
+<li>可以通过增加 <code>/*#__PURE__*/</code> 显示声明代码可以被 Tree-Shaking 剔除</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>支持输出多种构建产物</strong><ul>
+<li>根据打包和运行环境不同，可是通过 IIFE 格式直接引用，可以输出支持 webpack / rollup 的 esm-bundler 文件，也可输出支持浏览器直接运行的 esm-browser 文件，还可以支持 node.js 运行的文件</li>
+<li>以上输出可以使用不同参数配置</li>
+</ul>
+</li>
+<li><strong>特性开关</strong><ul>
+<li>框架的各种特性可以通过不同的开关来处理</li>
+<li>特性开关的好处：<ul>
+<li>更好的使用 Tree-Shaking</li>
+<li>灵活性：<ol>
+<li>通过特性开关增加新特性而不用担心打包文件体积</li>
+<li>框架升级时可以通过特性开关保留需要的功能，利于平滑升级</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>错误处理</strong><ul>
+<li>错误处理决定代码的健壮性</li>
+<li>内部使用一个统一的方法 <code>callWithErrorHandling</code> 来捕获错误</li>
+<li>通过 <code>registerErrorHandle</code> 函数可以注册错误处理程序，处理 <code>callWithErrorHandling</code> 捕获到的错误</li>
+</ul>
+</li>
+<li><strong>良好的 TS 类型支持</strong><ul>
+<li>使用 TS 编写代码不等于良好的 TS 类型支持，良好的类型支持需要能够更直观的展示类型</li>
+<li>Vue.js 源码的 <code>runtime-core/src.apiDefineComponent.ts</code> 主要为 TS 类型支持服务</li>
+</ul>
+</li>
+</ul>
+<h3 id="第-3-章：Vue-js-3-的设计思路"><a href="#第-3-章：Vue-js-3-的设计思路" class="headerlink" title="第 3 章：Vue.js 3 的设计思路"></a>第 3 章：Vue.js 3 的设计思路</h3><ul>
+<li><p>声明式描述 UI</p>
+<ul>
+<li>使用 HTML 描述页面涉及如下四个方面<ul>
+<li>DOM 元素</li>
+<li>属性：id、class …</li>
+<li>时间：click</li>
+<li>元素的层级结构</li>
+</ul>
+</li>
+<li>针对以上四个方面，Vue 提供的解决方案<ul>
+<li>使用与 HTML 标签一致的方式描述 DOM 元素</li>
+<li>使用与 HTML 标签一致的方式描述基础属性，使用 <code>:</code> 或 <code>v-bind</code> 描述动态属性</li>
+<li>使用 <code>@</code> 或 <code>v-on</code> 描述事件</li>
+<li>使用和 HTML 一样的方式描述层级结构</li>
+</ul>
+</li>
+<li>除了使用模板的方式描述页面，还可以使用 JS 对象的方式描述（即虚拟 DOM）UI，再通过渲染器渲染页面</li>
+<li>h 函数是一个辅助创建虚拟 DOM 的工具函数</li>
+</ul>
+</li>
+<li><p>渲染器基础</p>
+<ul>
+<li><p>渲染器作用：把虚拟 DOM 渲染为真实 DOM</p>
+</li>
+<li><p>渲染器的实现思路</p>
+<ul>
+<li>接受两个参数：虚拟 DOM、挂载点（真实 DOM，用于放置被渲染的虚拟 DOM）</li>
+<li>创建元素：通过 <code>vnode.tag</code> 创建 DOM 元素</li>
+<li>处理属性和事件：如果属性以 on 开通，说明是事件，截取 on 之后的函数内容添加到 <code>addEventListener</code> 函数</li>
+<li>处理 children：如果是一个数组，则递归调用 render 继续渲染，如果是一个 string，则通过 <code>createTextNode</code> 函数创建一个文本节点</li>
+</ul>
+</li>
+<li><p><strong>渲染器的核心在于准确找到变更节点并变更内容</strong></p>
+</li>
+<li><p>创建渲染器参考函数</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">renderer</span><span class="token punctuation">(</span><span class="token parameter">vnode<span class="token punctuation">,</span> container</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// 使用 vnode.tag 作为标签名创建 DOM 元素</span>
+  <span class="token keyword">const</span> el <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span>vnode<span class="token punctuation">.</span>tag<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 遍历 vnode.props，将属性、事件添加到 DOM 元素</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> key <span class="token keyword">in</span> vnode<span class="token punctuation">.</span>props<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^in</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      el<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span>key<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> vnode<span class="token punctuation">.</span>props<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token comment">// 处理 children</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">typeof</span> vnode<span class="token punctuation">.</span>children <span class="token operator">===</span> <span class="token string">"string"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    el<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">createTextNode</span><span class="token punctuation">(</span>vnode<span class="token punctuation">.</span>children<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>vnode<span class="token punctuation">.</span>children<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    vnode<span class="token punctuation">.</span>children<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">child</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token function">renderer</span><span class="token punctuation">(</span>child<span class="token punctuation">,</span> el<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token comment">// 将元素添加到挂载点下</span>
+  container<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>el<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</li>
+<li><p>组件的本质</p>
+<ul>
+<li><p><strong>组件就是一组 DOM 元素的封装</strong>，可以由函数组成，也可以由对象组成</p>
+</li>
+<li><p>处理渲染组件的函数是 <code>mountComponent</code></p>
+<ul>
+<li><p>实现步骤</p>
+<ol>
+<li>获取要渲染的内容（虚拟 DOM）</li>
+<li>递归调用 render 渲染</li>
+</ol>
+</li>
+<li><p>函数式组件渲染</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">mountComponent</span><span class="token punctuation">(</span><span class="token parameter">vnode<span class="token punctuation">,</span> container</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> subtree <span class="token operator">=</span> vnode<span class="token punctuation">.</span><span class="token function">tag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">renderer</span><span class="token punctuation">(</span>subtree<span class="token punctuation">,</span> container<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>对象式组件渲染</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">mountComponent</span><span class="token punctuation">(</span><span class="token parameter">vnode<span class="token punctuation">,</span> container</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> subtree <span class="token operator">=</span> vnode<span class="token punctuation">.</span>tag<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 调用对象的 render 函数获取虚拟 DOM</span>
+  <span class="token function">renderer</span><span class="token punctuation">(</span>subtree<span class="token punctuation">,</span> container<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>编译器的作用：将模板编译为渲染函数</p>
+</li>
+<li><p>编译器将模板编译为渲染函数，渲染函数将虚拟 DOM 转化为真实 DOM，两者相互依赖，可以借助对方提升整体性能（比如编译器告诉渲染器哪些元素是静态，更新的时候渲染函数就可以只针对动态内容更新，提升效率）</p>
 </li>
 </ul>
 ]]></content>
