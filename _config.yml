@@ -95,7 +95,7 @@ exclude:
 ignore:
 
 # Extensions
-theme: hexo-theme-matery # 指定主题
+theme: keep # 指定主题
 
 # Deployment 自动化部署
 ## Docs: https://hexo.io/docs/one-command-deployment
@@ -113,8 +113,10 @@ deploy:
 
 # 博客搜索配置
 search:
-  path: search.xml
+  path: search.json
   field: post
+  content: true
+  format: striptags
 
 # 文章字数统计插件
 postInfo:
