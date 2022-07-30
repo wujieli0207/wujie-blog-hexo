@@ -4,7 +4,6 @@ title: JS 数据类型基础梳理
 date: 2021-12-28 21:00:53
 categories: 前端
 tags: JavaScript
-img: https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20211228210115.jpg
 ---
 ## JS 的数据类型基础
 - JS 中数据类型分为两大类：基础数据类型，引用数据类型

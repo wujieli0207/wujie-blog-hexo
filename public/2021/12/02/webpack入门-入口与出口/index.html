@@ -230,61 +230,58 @@
         <div class="article-content markdown-body">
             <h2 id="入口及基础配置"><a href="#入口及基础配置" class="headerlink" title="入口及基础配置"></a>入口及基础配置</h2><ul>
 <li>webpack 该用哪个模块作为构建依赖图的开始</li>
-<li>在 <code>entry</code> 配置入口，可以指定一个或多个入口  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  entry<span class="token operator">:</span> <span class="token string">'./path/to/my/entry/file.js'</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<span id="more"></span></li>
+<li>在 <code>entry</code> 配置入口，可以指定一个或多个入口<br><code>javascript module.exports = &#123; entry: &#39;./path/to/my/entry/file.js&#39; &#125;; </code><span id="more"></span></li>
 <li>单页面场景配置<ul>
 <li>将应用入口和第三方库分离</li>
-<li>可以使用 <code>CommonsChunkPlugin</code>  从「应用程序 bundle」中提取 vendor 引用到 vendor bundle，把引用 vendor 的部分替换为 ，<code>__webpack_require__()</code> 调用<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-	app<span class="token operator">:</span> <span class="token string">'./src/app.js'</span><span class="token punctuation">,</span>
-	vendors<span class="token operator">:</span> <span class="token string">'./src/vendors.js'</span>
-  <span class="token punctuation">&#125;</span>
+<li>可以使用 <code>CommonsChunkPlugin</code> 从「应用程序 bundle」中提取 vendor 引用到 vendor bundle，把引用 vendor 的部分替换为 ，<code>__webpack_require__()</code> 调用<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">entry</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">app</span><span class="token operator">:</span> <span class="token string">"./src/app.js"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">vendors</span><span class="token operator">:</span> <span class="token string">"./src/vendors.js"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 </li>
 <li>多页面场景配置<ul>
 <li>不同页面入口分开配置，进入新页面时独立加载 html 和对应引用</li>
 <li>可以使用 <code>CommonsChunkPlugin</code> 为每个页面间的应用程序共享代码创建 bundle，实现代码复用的效果<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-	pageOne<span class="token operator">:</span> <span class="token string">'./src/pageOne/index.js'</span><span class="token punctuation">,</span>
-	pageTwo<span class="token operator">:</span> <span class="token string">'./src/pageTwo/index.js'</span><span class="token punctuation">,</span>
-	pageThree<span class="token operator">:</span> <span class="token string">'./src/pageThree/index.js'</span>
-  <span class="token punctuation">&#125;</span>
+  <span class="token literal-property property">entry</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">pageOne</span><span class="token operator">:</span> <span class="token string">"./src/pageOne/index.js"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">pageTwo</span><span class="token operator">:</span> <span class="token string">"./src/pageTwo/index.js"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">pageThree</span><span class="token operator">:</span> <span class="token string">"./src/pageThree/index.js"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
 </li>
 </ul>
 <h2 id="出口及基础配置"><a href="#出口及基础配置" class="headerlink" title="出口及基础配置"></a>出口及基础配置</h2><ul>
-<li><p>webpack 输出 bundles 的目录及命名方式配置，默认为  <code>./dist</code></p>
+<li><p>webpack 输出 bundles 的目录及命名方式配置，默认为 <code>./dist</code></p>
 </li>
 <li><p><strong>可以指定多个入口，但只能有一个出口（output）</strong></p>
 </li>
 <li><p>在 <code>output</code> 字段配置：输出为一个对象，输出路径和文件名</p>
-  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"path"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  output<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-	path<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'dist'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-	filename<span class="token operator">:</span> <span class="token string">'my-first-webpack.bundle.js'</span>
-  <span class="token punctuation">&#125;</span>
+  <span class="token literal-property property">output</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">path</span><span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">"dist"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">filename</span><span class="token operator">:</span> <span class="token string">"my-first-webpack.bundle.js"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>对于多文件入口，使用占位符保持文件名正确</p>
-  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-	app<span class="token operator">:</span> <span class="token string">'./src/app.js'</span><span class="token punctuation">,</span>
-	search<span class="token operator">:</span> <span class="token string">'./src/search.js'</span>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">entry</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+	<span class="token literal-property property">app</span><span class="token operator">:</span> <span class="token string">'./src/app.js'</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">search</span><span class="token operator">:</span> <span class="token string">'./src/search.js'</span>
   <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  output<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-	filename<span class="token operator">:</span> <span class="token string">'[name].js'</span><span class="token punctuation">,</span>
-	path<span class="token operator">:</span> __dirname <span class="token operator">+</span> <span class="token string">'/dist'</span>
+  <span class="token literal-property property">output</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+	<span class="token literal-property property">filename</span><span class="token operator">:</span> <span class="token string">'[name].js'</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">path</span><span class="token operator">:</span> __dirname <span class="token operator">+</span> <span class="token string">'/dist'</span>
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
 
 <span class="token comment">// 写入到硬盘：./dist/app.js, ./dist/search.js</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li><p>在编译时不知道最终输出文件的 <code>publicPath</code> 的情况下，<code>publicPath</code> 留空，并且在入口起点设置 <code>__webpack_public_path__</code></p>
-  <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">__webpack_public_path__ <span class="token operator">=</span> myRuntimePublicPath
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">__webpack_public_path__ <span class="token operator">=</span> myRuntimePublicPath<span class="token punctuation">;</span>
 
 <span class="token comment">// 剩余的应用程序入口</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 </ul>

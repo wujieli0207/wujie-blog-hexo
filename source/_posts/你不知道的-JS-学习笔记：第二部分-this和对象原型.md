@@ -3,7 +3,6 @@ title: 你不知道的 JS 学习笔记：this和对象原型
 date: 2022-02-05 20:18:01
 categories: 前端
 tags: JavaScript
-img: https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20220204150854.jpg
 ---
 ## 第一章：关于 this
 - 误解

@@ -3,7 +3,6 @@ title: 你不知道的 JS 学习笔记：类型和语法
 date: 2022-02-21 19:40:23
 categories: 前端
 tags: JavaScript
-img: https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20220204150854.jpg
 ---
 ## 第一章：类型
 - **JS 中的类型：值的内部特征，定义了值的行为，使其区别于其他值**

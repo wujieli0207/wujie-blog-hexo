@@ -3,7 +3,6 @@ title: 《Vuejs 设计与实现》学习笔记：框架设计概览
 date: 2022-03-23 12:42:32
 categories: 前端
 tags: JavaScript
-img: https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20220204150854.jpg
 ---
 
 ### 第 1 章：权衡的艺术

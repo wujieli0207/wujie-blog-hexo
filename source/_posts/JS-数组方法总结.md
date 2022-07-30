@@ -3,7 +3,6 @@ title: JS 数组方法总结
 date: 2021-12-23 15:50:56
 categories: 前端
 tags: JavaScript
-img: https://notesimgs.oss-cn-shanghai.aliyuncs.com/img/20211225154802.jpg
 ---
 ## 数组基础操作
 - 创建数组的方式有两种
