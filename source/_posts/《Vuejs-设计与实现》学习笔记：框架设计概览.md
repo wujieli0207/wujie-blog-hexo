@@ -2,7 +2,7 @@
 title: 《Vuejs 设计与实现》学习笔记：框架设计概览
 date: 2022-03-23 12:42:32
 categories: 前端
-tags: JavaScript
+tags: vue
 ---
 
 ### 第 1 章：权衡的艺术
