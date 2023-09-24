@@ -1,0 +1,6 @@
+/* 注入 CSS 文件修改 CSS 变量使用示例 */
+
+:root {
+  /* 隐藏文章内容页面的文章修改时间 */
+  --post-update-datetime: none;
+}
