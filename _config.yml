@@ -107,9 +107,8 @@ deploy:
   user: root
   root: /usr/local/nginx/html/wujie-blog-hexo/
   port: 22 # Default is 22
-  delete: [true|false] # Default is true
+  delete: true # Default is true
   args: public
-  rsh: <remote shell>
   verbose: [true|false] # Default is true
   ignore_errors: [true|false] # Default is false
 
