@@ -1,6 +1,6 @@
 {
-  "name": "hexo-theme-keep-starter",
-  "version": "3.7.7",
+  "name": "wujie-blog-hexo",
+  "version": "1.0.0",
   "private": false,
   "scripts": {
     "dev": "hexo clean && hexo server --open",
@@ -10,16 +10,8 @@
     "clean": "hexo clean",
     "deploy": "hexo build && hexo deploy"
   },
-  "author": "XPoet",
+  "author": "wujieli",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com:theme-keep/hexo-theme-keep-starter.git"
-  },
-  "bugs": {
-    "url": "https://github.com/theme-keep/hexo-theme-keep-starter/issues"
-  },
-  "homepage": "https://github.com/theme-keep/hexo-theme-keep-starter#readme",
   "hexo": {
     "version": "6.3.0"
   },
