@@ -17,8 +17,8 @@ Hi，我是 wujie
 
 ## 哪里可以找到我
 
-- Blog：[Keep Going](https://www.wujieli.top/)
-- Weekly: [旅行者计划](https://weekly.wujieli.top/)
-- 掘金：[WujieLi](https://juejin.cn/user/3466111120582039)
-- 小红书：[两万焦](https://www.xiaohongshu.com/user/profile/651be9db00000000240156cc)
-- Github: [wujieli0207](https://github.com/wujieli0207)
+- Blog：[旅行者计划](https://www.wujieli.top/)
+- Weekly: [旅行者周刊](https://weekly.wujieli.top/)
+- [掘金](https://juejin.cn/user/3466111120582039)
+- [小红书](https://www.xiaohongshu.com/user/profile/651be9db00000000240156cc)
+- [github](https://github.com/wujieli0207)

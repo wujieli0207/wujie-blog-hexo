@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Keep Going
-subtitle: Keep Going
+title: 旅行者计划
+subtitle: 旅行者计划
 description: '不忘初心，无限进步'
-keywords: Blog Learning Share
-author: Mr.wujieli
+keywords: ['博客', '前端', '技术', '个人成长', '独立开发']
+author: 两万焦
 language: zh-CN
 timezone: 'Asia/Shanghai'
 
